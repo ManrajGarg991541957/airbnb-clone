@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Map from "../components/Map";
 import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard";
@@ -18,8 +19,8 @@ function Search({ searchResults }) {
         placeholder={`${location} | ${range} | ${numberOfGuests} guests`}
       />
 
-      <main className="flex-grow pt-14 px-6">
-        <section>
+      <main className="flex">
+        <section className="flex-grow pt-14 px-6">
           <p className="text-xs">
             300+ Stays - {range} - {numberOfGuests} guests
           </p>
@@ -50,6 +51,10 @@ function Search({ searchResults }) {
             )}
           </div>
         </section>
+
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Map searchResults={searchResults} />
+        </section>
       </main>
 
       <Footer />
@@ -66,7 +71,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      searchResults: searchResults,
+      searchResults,
     },
   };
 }
